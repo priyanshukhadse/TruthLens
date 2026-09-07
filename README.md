@@ -1,4 +1,4 @@
-# 🛰️ AI Truth Checker
+# 🛰️ TruthLens
 
 Verify factual claims against your own documents using a Retrieval-Augmented pipeline with cross-encoder reranking and Natural Language Inference — not a generative LLM guessing from memory, but a traceable, evidence-based verdict.
 
