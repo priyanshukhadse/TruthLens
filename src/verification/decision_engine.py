@@ -33,9 +33,7 @@ class DecisionEngine:
         )
 
 
-    # ========================================================
     # NORMALIZE RERANKER SCORE
-    # ========================================================
 
     def normalize_reranker_score(self, score):
 
@@ -64,7 +62,6 @@ class DecisionEngine:
             return 0.0
 
 
-    # ========================================================
     # MAKE FINAL DECISION
     #
     # This decision logic is fully domain-agnostic.
@@ -73,7 +70,6 @@ class DecisionEngine:
     # does not depend on any hardcoded entities, keywords,
     # or subject-matter rules — so it works the same way
     # regardless of what documents you index.
-    # ========================================================
 
     def decide(
         self,
@@ -84,9 +80,7 @@ class DecisionEngine:
         evidence=None
     ):
 
-        # ----------------------------------------------------
         # Extract NLI information
-        # ----------------------------------------------------
 
         if not nli_result:
 
@@ -145,9 +139,7 @@ class DecisionEngine:
         )
 
 
-        # ----------------------------------------------------
         # Normalize reranker
-        # ----------------------------------------------------
 
         if reranker_score is not None:
 
@@ -166,9 +158,7 @@ class DecisionEngine:
             normalized_reranker_score = None
 
 
-        # ====================================================
         # RULE 1 — STRONG NLI CONTRADICTION
-        # ====================================================
 
         if (
 
@@ -216,9 +206,7 @@ class DecisionEngine:
             }
 
 
-        # ====================================================
         # RULE 2 — STRONG NLI ENTAILMENT
-        # ====================================================
 
         if (
 
@@ -266,9 +254,7 @@ class DecisionEngine:
             }
 
 
-        # ====================================================
         # RULE 3 — HIGH SIMILARITY + HIGH RELEVANCE
-        # ====================================================
 
         if (
 
@@ -333,9 +319,7 @@ class DecisionEngine:
             }
 
 
-        # ====================================================
         # RULE 4 — MODERATE RELEVANCE
-        # ====================================================
 
         if (
 
@@ -385,9 +369,7 @@ class DecisionEngine:
             }
 
 
-        # ====================================================
         # RULE 5 — DEFAULT
-        # ====================================================
 
         return {
 
