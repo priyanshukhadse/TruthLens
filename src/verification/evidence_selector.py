@@ -13,16 +13,12 @@ class EvidenceSelector:
             "for evidence sentence selection."
         )
 
-        # ----------------------------------------------------
         # Reuse Existing Reranker
-        # ----------------------------------------------------
 
         self.reranker = reranker
 
 
-    # ========================================================
     # SPLIT DOCUMENT INTO SENTENCES
-    # ========================================================
 
     def split_sentences(
         self,
@@ -33,9 +29,7 @@ class EvidenceSelector:
 
         current_sentence = ""
 
-        # ----------------------------------------------------
         # Simple Sentence Splitting
-        # ----------------------------------------------------
 
         for character in document:
 
@@ -57,9 +51,7 @@ class EvidenceSelector:
                 current_sentence = ""
 
 
-        # ----------------------------------------------------
         # Handle Remaining Text
-        # ----------------------------------------------------
 
         remaining_text = (
             current_sentence
@@ -76,9 +68,7 @@ class EvidenceSelector:
         return sentences
 
 
-    # ========================================================
     # CHECK WHETHER SENTENCE NEEDS CONTEXT
-    # ========================================================
 
     def needs_context(
         self,
@@ -86,9 +76,7 @@ class EvidenceSelector:
         query
     ):
 
-        # ----------------------------------------------------
         # Pronouns That Often Require Previous Context
-        # ----------------------------------------------------
 
         context_dependent_words = [
 
@@ -117,9 +105,7 @@ class EvidenceSelector:
         ]
 
 
-        # ----------------------------------------------------
         # Convert Sentence to Lowercase
-        # ----------------------------------------------------
 
         sentence_lower = (
 
@@ -130,9 +116,7 @@ class EvidenceSelector:
         )
 
 
-        # ----------------------------------------------------
         # Check First Word
-        # ----------------------------------------------------
 
         words = (
 
@@ -160,9 +144,7 @@ class EvidenceSelector:
                 return True
 
 
-        # ----------------------------------------------------
         # Check Common Context-Dependent Patterns
-        # ----------------------------------------------------
 
         context_patterns = [
 
@@ -242,9 +224,7 @@ class EvidenceSelector:
         return False
 
 
-    # ========================================================
     # SELECT BEST EVIDENCE SENTENCE
-    # ========================================================
 
     def select(
         self,
@@ -256,18 +236,14 @@ class EvidenceSelector:
             "\nSplitting document into sentences..."
         )
 
-        # ----------------------------------------------------
         # Split Document into Sentences
-        # ----------------------------------------------------
 
         sentences = self.split_sentences(
             document
         )
 
 
-        # ----------------------------------------------------
         # Handle Empty Document
-        # ----------------------------------------------------
 
         if not sentences:
 
@@ -288,9 +264,7 @@ class EvidenceSelector:
         )
 
 
-        # ----------------------------------------------------
         # Create Query-Sentence Pairs
-        # ----------------------------------------------------
 
         pairs = []
 
@@ -306,9 +280,7 @@ class EvidenceSelector:
             )
 
 
-        # ----------------------------------------------------
         # Calculate Sentence Relevance
-        # ----------------------------------------------------
 
         print(
             "Calculating sentence relevance scores..."
@@ -325,9 +297,7 @@ class EvidenceSelector:
         )
 
 
-        # ----------------------------------------------------
         # Find Best Sentence
-        # ----------------------------------------------------
 
         best_index = max(
 
@@ -359,16 +329,12 @@ class EvidenceSelector:
         )
 
 
-        # ====================================================
         # CONTEXT-AWARE EVIDENCE SELECTION
-        # ====================================================
 
         selected_sentences = []
 
 
-        # ----------------------------------------------------
         # Check Previous Sentence
-        # ----------------------------------------------------
 
         if best_index > 0:
 
@@ -396,9 +362,7 @@ class EvidenceSelector:
                 )
 
 
-        # ----------------------------------------------------
         # Add Best Sentence
-        # ----------------------------------------------------
 
         selected_sentences.append(
 
@@ -407,9 +371,7 @@ class EvidenceSelector:
         )
 
 
-        # ----------------------------------------------------
         # Check Next Sentence
-        # ----------------------------------------------------
 
         if best_index < (
 
@@ -459,9 +421,7 @@ class EvidenceSelector:
                 )
 
 
-        # ----------------------------------------------------
         # Remove Duplicate Sentences
-        # ----------------------------------------------------
 
         unique_sentences = []
 
@@ -481,9 +441,7 @@ class EvidenceSelector:
                 )
 
 
-        # ----------------------------------------------------
         # Combine Evidence
-        # ----------------------------------------------------
 
         final_evidence = (
 
@@ -496,9 +454,7 @@ class EvidenceSelector:
         )
 
 
-        # ----------------------------------------------------
         # Debug Output
-        # ----------------------------------------------------
 
         print(
 
@@ -526,9 +482,7 @@ class EvidenceSelector:
         )
 
 
-        # ----------------------------------------------------
         # Return Context-Aware Evidence
-        # ----------------------------------------------------
 
         return {
 
