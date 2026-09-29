@@ -15,9 +15,7 @@ class SimilarityScorer:
 
     ):
 
-        # ====================================================
         # LOAD OR REUSE EMBEDDING MODEL
-        # ====================================================
 
         if model is not None:
 
@@ -56,9 +54,7 @@ class SimilarityScorer:
             )
 
 
-    # ========================================================
     # CALCULATE SEMANTIC SIMILARITY
-    # ========================================================
 
     def calculate_similarity(
 
@@ -70,9 +66,7 @@ class SimilarityScorer:
 
     ):
 
-        # ----------------------------------------------------
         # Generate Embeddings
-        # ----------------------------------------------------
 
         embeddings = (
 
@@ -93,9 +87,7 @@ class SimilarityScorer:
         )
 
 
-        # ----------------------------------------------------
         # Extract Claim Embedding
-        # ----------------------------------------------------
 
         claim_embedding = (
 
@@ -108,9 +100,7 @@ class SimilarityScorer:
         )
 
 
-        # ----------------------------------------------------
         # Extract Evidence Embedding
-        # ----------------------------------------------------
 
         evidence_embedding = (
 
@@ -123,9 +113,7 @@ class SimilarityScorer:
         )
 
 
-        # ----------------------------------------------------
         # Calculate Cosine Similarity
-        # ----------------------------------------------------
 
         similarity = (
 
@@ -143,9 +131,7 @@ class SimilarityScorer:
         )
 
 
-        # ----------------------------------------------------
         # Convert To Float
-        # ----------------------------------------------------
 
         similarity = float(
 
@@ -154,8 +140,6 @@ class SimilarityScorer:
         )
 
 
-        # ----------------------------------------------------
         # Return Similarity
-        # ----------------------------------------------------
 
         return similarity
