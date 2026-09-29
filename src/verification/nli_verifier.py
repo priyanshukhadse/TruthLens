@@ -21,9 +21,8 @@ class NLIVerifier:
             f"{model_name}"
         )
 
-        # ----------------------------------------------------
+      
         # Load Tokenizer
-        # ----------------------------------------------------
 
         self.tokenizer = (
             AutoTokenizer.from_pretrained(
@@ -31,9 +30,7 @@ class NLIVerifier:
             )
         )
 
-        # ----------------------------------------------------
         # Load Model
-        # ----------------------------------------------------
 
         self.model = (
             AutoModelForSequenceClassification
@@ -42,15 +39,11 @@ class NLIVerifier:
             )
         )
 
-        # ----------------------------------------------------
         # Set Evaluation Mode
-        # ----------------------------------------------------
 
         self.model.eval()
 
-        # ----------------------------------------------------
         # Label Mapping
-        # ----------------------------------------------------
 
         self.id2label = (
             self.model.config.id2label
@@ -65,9 +58,7 @@ class NLIVerifier:
             self.id2label
         )
 
-    # ========================================================
     # VERIFY CLAIM AGAINST EVIDENCE
-    # ========================================================
 
     def verify(
         self,
@@ -75,9 +66,7 @@ class NLIVerifier:
         evidence
     ):
 
-        # ----------------------------------------------------
         # Validate Input
-        # ----------------------------------------------------
 
         if not claim or not evidence:
 
@@ -104,7 +93,6 @@ class NLIVerifier:
 
             }
 
-        # ----------------------------------------------------
         # Tokenize Evidence + Claim
         #
         # IMPORTANT:
@@ -114,7 +102,6 @@ class NLIVerifier:
         #
         # This is the correct direction for
         # evidence-based fact verification.
-        # ----------------------------------------------------
 
         inputs = self.tokenizer(
 
@@ -130,9 +117,7 @@ class NLIVerifier:
 
         )
 
-        # ----------------------------------------------------
         # Run NLI Model
-        # ----------------------------------------------------
 
         with torch.no_grad():
 
@@ -142,9 +127,7 @@ class NLIVerifier:
 
             )
 
-        # ----------------------------------------------------
         # Convert Logits to Probabilities
-        # ----------------------------------------------------
 
         probabilities = torch.softmax(
 
@@ -154,9 +137,7 @@ class NLIVerifier:
 
         )[0]
 
-        # ----------------------------------------------------
         # Convert Results to Dictionary
-        # ----------------------------------------------------
 
         label_probabilities = {}
 
@@ -190,9 +171,7 @@ class NLIVerifier:
 
             )
 
-        # ----------------------------------------------------
         # Get Predicted Label
-        # ----------------------------------------------------
 
         predicted_label = max(
 
@@ -202,9 +181,7 @@ class NLIVerifier:
 
         )
 
-        # ----------------------------------------------------
         # Get Confidence
-        # ----------------------------------------------------
 
         confidence = (
 
@@ -216,9 +193,7 @@ class NLIVerifier:
 
         )
 
-        # ----------------------------------------------------
         # Extract Standardized Probabilities
-        # ----------------------------------------------------
 
         contradiction_probability = (
 
@@ -256,9 +231,7 @@ class NLIVerifier:
 
         )
 
-        # ----------------------------------------------------
         # DEBUG OUTPUT
-        # ----------------------------------------------------
 
         print(
 
@@ -378,9 +351,7 @@ class NLIVerifier:
 
         )
 
-        # ----------------------------------------------------
         # Return Result
-        # ----------------------------------------------------
 
         return {
 
